@@ -1,3 +1,4 @@
+/* eslint-disable cypress/unsafe-to-chain-command */
 /* eslint-disable max-len */
 /// <reference types='cypress' />
 
@@ -30,7 +31,16 @@ describe('Student Registration page', () => {
     cy.get('#react-select-4-input').type('Delhi{enter}', { force: true });
 
     cy.get('#submit').click({ force: true });
-    cy.contains('Thanks for submitting the form').scrollIntoView();
-    cy.contains('Thanks for submitting the form').should('be.visible');
+
+    cy.contains('Thanks for submitting the form').scrollIntoView().should('be.visible');
+
+    cy.get('tbody > tr').contains('td', 'Student Name').next().should('have.text', 'Viktoriia Mykhailiak');
+    cy.get('tbody > tr').contains('td', 'Student Email').next().should('have.text', 'viktoriia.mykhailiak@gmail.com');
+    cy.get('tbody > tr').contains('td', 'Gender').next().should('have.text', 'Female');
+    cy.get('tbody > tr').contains('td', 'Mobile').next().should('have.text', '0635537015');
+    cy.get('tbody > tr').contains('td', 'Date of Birth').next().should('have.text', '01 September,2005');
+    cy.get('tbody > tr').contains('td', 'Hobbies').next().should('have.text', 'Sports');
+    cy.get('tbody > tr').contains('td', 'Address').next().should('have.text', 'Lviv, Ukraine');
+    cy.get('tbody > tr').contains('td', 'State and City').next().should('have.text', 'NCR Delhi');
   });
 });
